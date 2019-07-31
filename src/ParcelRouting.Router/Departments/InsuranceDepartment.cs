@@ -1,17 +1,17 @@
 ﻿namespace ParcelRouting.Router.Departments
 {
-    public class RegularDepartment : IDepartment
+    public class InsuranceDepartment : IDepartment
     {
-        public string Name => "Regular";
+        public string Name => "Insurance";
 
         public bool CanHandleWeight(double parcelWeight)
         {
-            return parcelWeight > 1 && parcelWeight <=10;
+            return true;
         }
 
         public bool CanHandleDeclaredValue(double parcelValue)
         {
-            return true;
+            return parcelValue > 1000;
         }
     }
 }

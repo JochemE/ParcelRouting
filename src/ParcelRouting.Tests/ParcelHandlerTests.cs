@@ -48,5 +48,17 @@ namespace ParcelRouting.Tests
                 .Single()
                 .Departments.Should().BeEquivalentTo("Heavy");
         }
+
+        [Fact]
+        public void parcel_with_a_declared_value_over_1k_euro_should_be_routed_via_the_insurance_department_first()
+        {
+            var parcelHandler = new ParcelHandler(new ParcelHandlerSettings());
+
+            parcelHandler.GetParcelRoutes(new Parcel("someId", "1234AB", "1a", 10.01, 1000.01))
+                .Single()
+                .Departments.Should()
+                .BeEquivalentTo(new [] {"Insurance", "Heavy"}, opt => opt
+                    .WithStrictOrdering());
+        }
     }
 }

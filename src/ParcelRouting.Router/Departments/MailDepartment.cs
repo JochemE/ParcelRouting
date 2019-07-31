@@ -4,9 +4,14 @@
     {
         public string Name => "Mail";
 
-        public bool CanHandle(double parcelWeight)
+        public bool CanHandleWeight(double parcelWeight)
         {
             return parcelWeight <= 1;
+        }
+
+        public bool CanHandleDeclaredValue(double parcelValue)
+        {
+            return true;
         }
     }
 }

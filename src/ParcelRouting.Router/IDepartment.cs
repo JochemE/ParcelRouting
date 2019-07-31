@@ -4,6 +4,8 @@
     {
         string Name { get; }
 
-        bool CanHandle(double parcelWeight);
+        bool CanHandleWeight(double parcelWeight);
+
+        bool CanHandleDeclaredValue(double parcelValue);
     }
 }

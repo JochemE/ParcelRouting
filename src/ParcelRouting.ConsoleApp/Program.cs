@@ -16,13 +16,9 @@ namespace ParcelRouting.ConsoleApp
             {
                 Console.WriteLine("=========================");
                 Console.WriteLine($"Parcel: {parcelRoute.PostalCode}-{parcelRoute.HouseNumber}-{parcelRoute.Id}");
-                Console.WriteLine($"- weight: {parcelRoute.Weight}");
-                Console.WriteLine($"- declared value: {parcelRoute.DeclaredValue}");
-                Console.WriteLine($"Is routed (with strict order):");
-                foreach (var department in parcelRoute.Departments)
-                {
-                    Console.WriteLine($"- {department}");
-                }
+                Console.WriteLine($"- weight                         : {parcelRoute.Weight}");
+                Console.WriteLine($"- declared value                 : {parcelRoute.DeclaredValue}");
+                Console.WriteLine($"- department route (strict order): {string.Join(",", parcelRoute.Departments)}");
                 Console.WriteLine();
             }
 

@@ -13,6 +13,7 @@ namespace ParcelRouting.Router
             this.settings = settings;
             this.settings.Departments = new IDepartment[]
             {
+                new InsuranceDepartment(),
                 new MailDepartment(),
                 new RegularDepartment(),
                 new HeavyDepartment()
@@ -27,7 +28,10 @@ namespace ParcelRouting.Router
 
             foreach (var parcelRoute in parcelRoutes)
             {
-                var applicableDepartments = settings.Departments.Where(d => d.CanHandle(parcelRoute.Weight));
+                var applicableDepartments = settings.Departments
+                    .Where(d => d.CanHandleWeight(parcelRoute.Weight))
+                    .Where(d => d.CanHandleDeclaredValue(parcelRoute.DeclaredValue));
+
                 foreach (var department in applicableDepartments)
                 {
                     parcelRoute.RouteVia(department.Name);    
