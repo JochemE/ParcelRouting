@@ -6,12 +6,11 @@ namespace ParcelRouting.Router
 {
     public class ParcelHandler
     {
-        private readonly ParcelHandlerSettings settings;
+        private readonly IDepartment[] departments;
 
-        public ParcelHandler(ParcelHandlerSettings settings)
+        public ParcelHandler()
         {
-            this.settings = settings;
-            this.settings.Departments = new IDepartment[]
+            departments = new IDepartment[]
             {
                 new InsuranceDepartment(),
                 new MailDepartment(),
@@ -28,7 +27,7 @@ namespace ParcelRouting.Router
 
             foreach (var parcelRoute in parcelRoutes)
             {
-                var applicableDepartments = settings.Departments
+                var applicableDepartments = departments
                     .Where(d => d.CanHandleWeight(parcelRoute.Weight))
                     .Where(d => d.CanHandleDeclaredValue(parcelRoute.DeclaredValue));
 

@@ -10,7 +10,7 @@ namespace ParcelRouting.ConsoleApp
         {
             var parcelStore = new EmbeddedResourceParcelStore();
 
-            var parcelHandler = new ParcelHandler(new ParcelHandlerSettings());
+            var parcelHandler = new ParcelHandler();
 
             foreach (var parcelRoute in parcelHandler.GetParcelRoutes(parcelStore.GetAll().ToArray()))
             {
