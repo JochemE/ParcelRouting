@@ -12,10 +12,10 @@ namespace ParcelRouting.Router
         {
             departments = new IDepartment[]
             {
-                new InsuranceDepartment(),
-                new MailDepartment(),
-                new RegularDepartment(),
-                new HeavyDepartment()
+                new Department("Insurance", parcel => parcel.DeclaredValue > 1000), 
+                new Department("Mail", parcel => parcel.Weight <= 1), 
+                new Department("Regular", parcel => parcel.Weight > 1 && parcel.Weight <=10), 
+                new Department("Heavy", parcel => parcel.Weight > 10)
             };
         }
 
@@ -28,8 +28,7 @@ namespace ParcelRouting.Router
             foreach (var parcelRoute in parcelRoutes)
             {
                 var applicableDepartments = departments
-                    .Where(d => d.CanHandleWeight(parcelRoute.Weight))
-                    .Where(d => d.CanHandleDeclaredValue(parcelRoute.DeclaredValue));
+                    .Where(d => d.CanHandle(parcelRoute));
 
                 foreach (var department in applicableDepartments)
                 {
