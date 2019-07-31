@@ -19,32 +19,37 @@ namespace ParcelRouting.Tests
                 .Should().BeEquivalentTo(parcel);
         }
 
-        [Fact]
-        public void parcel_with_weight_up_to_1kg_should_be_routed_via_mail_department()
+        [Theory]
+        [InlineData(0)]
+        [InlineData(1.0)]
+        public void parcels_with_weight_up_to_1kg_should_be_routed_via_mail_department(double parcelWeight)
         {
             var parcelHandler = new ParcelHandler();
 
-            parcelHandler.GetParcelRoutes(new Parcel("someId", "1234AB", "1a", 1.0, 0))
+            parcelHandler.GetParcelRoutes(new Parcel("someId", "1234AB", "1a", parcelWeight, 0))
                 .Single()
                 .Departments.Should().BeEquivalentTo("Mail");
         }
         
-        [Fact]
-        public void parcel_with_weight_up_to_10kg_should_be_routed_via_regular_department()
+        [Theory]
+        [InlineData(1.01)]
+        [InlineData(9.99)]
+        public void parcel_with_weight_up_to_10kg_should_be_routed_via_regular_department(double parcelWeight)
         {
             var parcelHandler = new ParcelHandler();
 
-            parcelHandler.GetParcelRoutes(new Parcel("someId", "1234AB", "1a", 10, 0))
+            parcelHandler.GetParcelRoutes(new Parcel("someId", "1234AB", "1a", parcelWeight, 0))
                 .Single()
                 .Departments.Should().BeEquivalentTo("Regular");
         }
 
-        [Fact]
-        public void parcel_with_weight_over_10kg_should_be_routed_via_heavy_department()
+        [Theory]
+        [InlineData(10.01)]
+        public void parcel_with_weight_over_10kg_should_be_routed_via_heavy_department(double parcelWeight)
         {
             var parcelHandler = new ParcelHandler();
 
-            parcelHandler.GetParcelRoutes(new Parcel("someId", "1234AB", "1a", 10.01, 0))
+            parcelHandler.GetParcelRoutes(new Parcel("someId", "1234AB", "1a", parcelWeight, 0))
                 .Single()
                 .Departments.Should().BeEquivalentTo("Heavy");
         }
