@@ -38,5 +38,15 @@ namespace ParcelRouting.Tests
                 .Single()
                 .Departments.Should().BeEquivalentTo("Regular");
         }
+
+        [Fact]
+        public void parcel_with_weight_over_10kg_should_be_routed_via_heavy_department()
+        {
+            var parcelHandler = new ParcelHandler(new ParcelHandlerSettings());
+
+            parcelHandler.GetParcelRoutes(new Parcel("someId", "1234AB", "1a", 10.01, 0))
+                .Single()
+                .Departments.Should().BeEquivalentTo("Heavy");
+        }
     }
 }

@@ -6,7 +6,7 @@
 
         public bool CanHandle(double parcelWeight)
         {
-            return parcelWeight > 1;
+            return parcelWeight > 1 && parcelWeight <=10;
         }
     }
 }

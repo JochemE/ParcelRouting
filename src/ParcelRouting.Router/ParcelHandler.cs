@@ -14,7 +14,8 @@ namespace ParcelRouting.Router
             this.settings.Departments = new IDepartment[]
             {
                 new MailDepartment(),
-                new RegularDepartment()
+                new RegularDepartment(),
+                new HeavyDepartment()
             };
         }
 
