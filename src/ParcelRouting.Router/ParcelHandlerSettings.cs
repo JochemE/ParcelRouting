@@ -1,10 +1,7 @@
-﻿using System.Collections.Generic;
-
-namespace ParcelRouting.Router
+﻿namespace ParcelRouting.Router
 {
     public class ParcelHandlerSettings
     {
-        public IReadOnlyCollection<string> Departments { get; set; }
-        public GetParcels GetParcels { get; set; }
+        public IDepartment[] Departments { get; set; }
     }
 }
